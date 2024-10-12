@@ -18,6 +18,7 @@ func BasicAuthMiddleware(username, password string) func(http.Handler) http.Hand
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			u, p, ok := r.BasicAuth()
 			if !ok {
+				next.ServeHTTP(w, r)
 				return
 			}
 
